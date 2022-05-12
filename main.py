@@ -74,7 +74,7 @@ class Game():
     def add_players(self):
         no_of_players = int(input("Enter number of players: "))
         for no in range(no_of_players):
-            player = Player(72)
+            player = Player(0)
             print(player.row, player.col)
             self.players.append(player)
 
