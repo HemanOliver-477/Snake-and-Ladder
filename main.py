@@ -2,7 +2,6 @@
 import pygame
 import random
 
-
 screen = pygame.display.set_mode((1024, 1024))
 board_img = pygame.image.load('board_img.webp')
 
@@ -110,21 +109,26 @@ class Game():
         print(player.pos)
         print(player.row, player.col)
 
-    def reset(self):
-        pass
+    def change_turn(self, player_turn):
+        player_turn += 1
+        if player_turn == len(self.players):
+            player_turn = 0
+        return player_turn
 
 run = True
+turn = 0
 game = Game()
 
+# Game Loop
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         elif (event.type == pygame.MOUSEBUTTONDOWN):
-            game.roll_dice(0)
+            game.roll_dice(turn)
+            turn = game.change_turn(turn)
         elif (game.gameOver):
             pass
-            
 
     screen.blit(board_img, (0, 0))
     game.draw_player()
